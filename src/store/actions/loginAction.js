@@ -1,5 +1,6 @@
 import axios from "axios"
 import { store } from 'react-notifications-component';
+import { history } from "../../helper/history"
 
 
 export const loginAction = (username, password) => {
@@ -21,11 +22,11 @@ export const getUserData = async (username, password) => {
 
     const recordData = data.results.filter((data) => data.name.toLowerCase() === user && data.birth_year.toLowerCase() === pass)
     if (recordData.length > 0) {
-
-        return recordData;
-        localStorage.setItem("user", recordData)
-
-
+        const tokenObj = { token: "1234567890", loggedIn: true }
+        const newRecordData = { ...tokenObj, recordData }
+        localStorage.setItem("user", JSON.stringify(newRecordData));
+        history.push('/home');
+        return;
     } else {
         store.addNotification({
             title: "Login Error!",
