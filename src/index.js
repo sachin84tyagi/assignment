@@ -5,6 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
+import 'react-notifications-component/dist/theme.css'
+
+import thunk from "redux-thunk";
 
 import reducers from "./store/reducers/loginReducer"
 
@@ -12,7 +15,7 @@ import { Provider } from "react-redux";
 
 import { createStore, applyMiddleware } from "redux";
 
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
